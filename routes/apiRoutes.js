@@ -17,7 +17,7 @@ app.post("/notes",function(req,res){
         id: Math.floor(Math.random() *  19209)
     }
     db.push(note)
-    fs.readFileSync("./db/db.json",JSON.stringify(db),function(req,res){
+    fs.writeFileSync("./db/db.json",JSON.stringify(db),function(req,res){
         if(err) throw err;
     })
     console.log("post db",db)
