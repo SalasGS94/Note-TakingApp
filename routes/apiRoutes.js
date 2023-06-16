@@ -24,4 +24,19 @@ app.post("/notes",function(req,res){
     res.json(db)
 })
 
+app.delete("/notes/:id",function(req,res){
+    const note = []
+    db.forEach(singleNote => {
+        if(singleNote.id != req.params.id){
+            note.push(singleNote)
+        }
+    })
+    db = note
+    fs.writeFileSync("./db/db.json",JSON.stringify(db),function(req,res){
+        if(err) throw err;
+    })
+    console.log("delete db",db)
+    res.json(db)
+})
+
 module.exports = app;
